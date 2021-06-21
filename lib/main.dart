@@ -11,88 +11,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Colors.black87,
-            body: SafeArea(
-              child: Column(children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        player.play('note1.wav');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
-                      ),
-                      child: Container()),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        player.play('note2.wav');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.orange),
-                      ),
-                      child: Container()),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        player.play('note3.wav');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.yellow),
-                      ),
-                      child: Container()),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        player.play('note4.wav');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.green),
-                      ),
-                      child: Container()),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        player.play('note5.wav');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.indigo),
-                      ),
-                      child: Container()),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        player.play('note6.wav');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.blue),
-                      ),
-                      child: Container()),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        player.play('note7.wav');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.purple),
-                      ),
-                      child: Container()),
-                ),
-              ]),
-            )));
+            body: Column(children: [
+              getButton(1, Colors.red),
+              getButton(2, Colors.orange),
+              getButton(3, Colors.yellow),
+              getButton(4, Colors.green),
+              getButton(5, Colors.indigo),
+              getButton(6, Colors.blue),
+              getButton(7, Colors.purple)
+            ])));
   }
 }
 
 AudioCache getPlayer() => AudioCache(prefix: 'assets/');
+
+Expanded getButton(int positionNumber, Color color) => Expanded(
+      child: GestureDetector(
+          onTapDown: (TapDownDetails details) {
+            player.play('note$positionNumber.wav');
+          },
+          child: Container(color: color)),
+    );
